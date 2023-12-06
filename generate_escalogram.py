@@ -12,7 +12,8 @@ from PIL import Image
 # 1239  - 50000:58000
 # 1249  - 54000:62000
 
-suffix = '1239'
+suffix = '1231'
+start = 72000
 dataCSV = './currents_'+suffix+'.csv'
 
 def save_grayscale(path :str, W):
@@ -37,21 +38,21 @@ def save_colormap(path :str, W, cmap_name :str):
 
     img = Image.fromarray(np.uint8(colored_coefficients * 255)).convert('RGB')
 
-    img.save(path+'/sample_'+ cmap_name +'_'+suffix+'.png',"PNG")
+    img.save(path+'/sample_'+ cmap_name +'_'+suffix+'_'+str(i)+'.png',"PNG")
 
     #img.show()
 
-def plot_samples(sample_fault, sample_control):
+def plot_samples(sample_fault, sample_control, mode :str):
     plt.figure(figsize=(12, 6))
     plt.subplot(1, 2, 1)
     plt.plot(sample_fault)
-    plt.title('Signal With Fault')
+    plt.title('Signal With Fault - '+mode)
     ax = plt.gca()
     ax.set_ylim([-80, 80])
 
     plt.subplot(1, 2, 2)
     plt.plot(sample_control)
-    plt.title('Signal Without Fault')
+    plt.title('Signal Without Fault - '+mode)
     ax = plt.gca()
     ax.set_ylim([-80, 80])
 
@@ -74,17 +75,37 @@ def generate_image(sample, path :str):
 
     save_colormap(path, W1, 'inferno')
 
+def generate_images(sample_fault, sample_control):
+    # # default
+    # print('default')
+    # generate_image(sample_fault, './results/yes')
+    # generate_image(sample_control, './results/no')
+    # plot_samples(sample_fault, sample_control, 'default')
+
+    # # random_noise
+    # print('random_noise')
+    # random_noise = np.random.randint(-80, 80, 8000)
+    # sample_f = sample_fault+random_noise
+    # sample_c = sample_control+random_noise
+    # generate_image(sample_f, './results/yes/random_noise')
+    # generate_image(sample_c, './results/no/random_noise')
+    # plot_samples(sample_f, sample_c, 'random noise')
+
+    # flipped
+    print('flipped')
+    sample_f = np.flip(sample_fault)
+    sample_c = np.flip(sample_control)
+    generate_image(sample_f, './results/yes/flipped')
+    generate_image(sample_c, './results/no/flipped')
+    plot_samples(sample_f, sample_c, 'flipped')
+
+
+# main
+
 data = pd.read_csv(dataCSV, header= None)
 
-# column 0 selected due to better fault visibility, rows manually selected with 8000 length
-sample_fault = data[0][50000:58000].values
-sample_control = data[0][102000:110000].values
+for i in [0,1,2]:
+    sample_fault = data[i][start:start+8000].values
+    sample_control = data[i][102000:110000].values
 
-print('starting...')
-
-generate_image(sample_fault, './.small/fault')
-generate_image(sample_control, './.small/control')
-
-plot_samples(sample_fault, sample_control)
-
-print('done')
+    generate_images(sample_fault, sample_control)
