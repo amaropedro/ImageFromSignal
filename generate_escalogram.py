@@ -76,20 +76,20 @@ def generate_image(sample, path :str):
     save_colormap(path, W1, 'inferno')
 
 def generate_images(sample_fault, sample_control):
-    # # default
-    # print('default')
-    # generate_image(sample_fault, './results/yes')
-    # generate_image(sample_control, './results/no')
-    # plot_samples(sample_fault, sample_control, 'default')
+    # default
+    print('default')
+    generate_image(sample_fault, './results/yes')
+    generate_image(sample_control, './results/no')
+    plot_samples(sample_fault, sample_control, 'default')
 
-    # # random_noise
-    # print('random_noise')
-    # random_noise = np.random.randint(-80, 80, 8000)
-    # sample_f = sample_fault+random_noise
-    # sample_c = sample_control+random_noise
-    # generate_image(sample_f, './results/yes/random_noise')
-    # generate_image(sample_c, './results/no/random_noise')
-    # plot_samples(sample_f, sample_c, 'random noise')
+    # random_noise
+    print('random_noise')
+    random_noise = np.random.randint(-80, 80, 8000)
+    sample_f = sample_fault+random_noise
+    sample_c = sample_control+random_noise
+    generate_image(sample_f, './results/yes/random_noise')
+    generate_image(sample_c, './results/no/random_noise')
+    plot_samples(sample_f, sample_c, 'random noise')
 
     # flipped
     print('flipped')
