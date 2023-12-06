@@ -84,7 +84,7 @@ def generate_images(sample_fault, sample_control):
 
     # random_noise
     print('random_noise')
-    random_noise = np.random.randint(-80, 80, 8000)
+    random_noise = np.random.randint(-8, 8, 8000)
     sample_f = sample_fault+random_noise
     sample_c = sample_control+random_noise
     generate_image(sample_f, './results/yes/random_noise')
