@@ -12,8 +12,8 @@ from PIL import Image
 # 1239  - 50000:58000
 # 1249  - 54000:62000
 
-suffix = '1231'
-start = 72000
+suffix = '1249'
+start = 54000
 dataCSV = './currents_'+suffix+'.csv'
 
 def save_grayscale(path :str, W):
@@ -80,16 +80,16 @@ def generate_images(sample_fault, sample_control):
     print('default')
     generate_image(sample_fault, './results/yes')
     generate_image(sample_control, './results/no')
-    plot_samples(sample_fault, sample_control, 'default')
+    # plot_samples(sample_fault, sample_control, 'default')
 
-    # random_noise
-    print('random_noise')
-    random_noise = np.random.randint(-8, 8, 8000)
-    sample_f = sample_fault+random_noise
-    sample_c = sample_control+random_noise
-    generate_image(sample_f, './results/yes/random_noise')
-    generate_image(sample_c, './results/no/random_noise')
-    plot_samples(sample_f, sample_c, 'random noise')
+    # # random_noise
+    # print('random_noise')
+    # random_noise = np.random.randint(-8, 8, 8000)
+    # sample_f = sample_fault+random_noise
+    # sample_c = sample_control+random_noise
+    # generate_image(sample_f, './results/yes/random_noise')
+    # generate_image(sample_c, './results/no/random_noise')
+    # plot_samples(sample_f, sample_c, 'random noise')
 
     # flipped
     print('flipped')
@@ -97,7 +97,7 @@ def generate_images(sample_fault, sample_control):
     sample_c = np.flip(sample_control)
     generate_image(sample_f, './results/yes/flipped')
     generate_image(sample_c, './results/no/flipped')
-    plot_samples(sample_f, sample_c, 'flipped')
+    # plot_samples(sample_f, sample_c, 'flipped')
 
 
 # main
