@@ -3,9 +3,11 @@
 
 ## Gerando imagens a partir de um sinal
     Foram tomadas duas amostras do sinal, manualmente, uma contendo a falha e a outra não. Ambas de comprimento 8000.
+    Esse processo foi repetido para cada canal, menos o neutro.
     Foi aplicada a transformada de wavelet às amostras
     Foram geradas as imagens
 
 ## Imagens
-    As imagens geradas estão no diretorio .small
+    Para cada amostra, foram gerados 2 escalogramas: uma "normal" e outra invertida (flipped)
+    As imagens geradas estão no diretório result
 
